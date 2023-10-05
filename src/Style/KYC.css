@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo&display=swap");
+
+label {
+  display: block;
+  padding: 10px 0px;
+  font-size: 20px;
+  line-height: 28px;
+}
+.infoFlexContainer {
+  padding: 0px 0px 10px 0px;
+}
+.Infocontainer {
+  background-color: #fff;
+  width: 70%;
+  margin: auto;
+  border-radius: 10px;
+  padding: 0px 0px 9px 0px;
+}
+.kycContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Archivo", sans-serif;
+}
+h3 {
+  padding: 20px 0px 0px 20px;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.flexItem1 {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 30px; */
+  justify-content: space-around;
+}
+.flexItem2 {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 30px; */
+  justify-content: space-around;
+}
+
+.flexItem1 input,
+.flexItem2 input {
+  background-color: #f3f3f3;
+  padding: 14px 0px;
+  border: none;
+  border-radius: 5px;
+  width: 630px;
+  padding: 15px 20px;
+  font-size: 18px;
+}
+
+td input {
+  background-color: #f3f3f3;
+  padding: 14px 0px;
+  border: none;
+  border-radius: 5px;
+  width: 340px;
+  padding: 15px 20px;
+  font-size: 18px;
+
+ 
+}
+
+.proposedContainer input {
+  width: 96%;
+  background-color: #f3f3f3;
+  padding: 15px 0px;
+  border: none;
+  border-radius: 5px;
+  margin: 0px 27px;
+  padding: 15px 20px;
+  font-size: 18px;
+
+}
+
+h5 {
+  font-size: 17px;
+}
+.url input {
+  background-color: #f3f3f3;
+  padding: 14px 0px;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+  padding: 15px 20px;
+  font-size: 18px;
+
+}
+.kycDocumentsContainer {
+  padding: 4px 19px;
+  /* width: 56%; */
+}
+.declarationContainer {
+  padding: 16px 0px;
+  line-height: 27px;
+}
+.declarationContainer h4 {
+  text-transform: uppercase;
+  padding: 3px 0px;
+}
+.submit-btn {
+  text-align: center;
+  padding: 29px 0px;
+}
+.submit-btn button {
+  padding: 9px 57px;
+  font-size: 22px;
+  background-color: #002142;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.error {
+  color: red;
+}
+select {
+  background-color: #f3f3f3;
+  padding: 18px 10px;
+  border: none;
+  border-radius: 5px;
+  width: 630px;
+}
+.sharholderCountry {
+  width: 400px;
+}
+
+.CompanyContactDetailContainer {
+  background-color: #fff;
+  width: 70%;
+  margin: auto;
+  border-radius: 10px;
+  padding: 0px 0px 9px 0px;
+}
+.CompanyContactFlexContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 0px;
+  margin: auto;
+  padding: 12px 20px;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.CompanyContactFlexContainer input,
+.CompanyContactDetailContainer input {
+  background-color: #f3f3f3;
+  padding: 14px 0px;
+  border: none;
+  border-radius: 5px;
+  width: 630px;
+  padding: 15px 20px;
+  font-size: 18px;
+
+}
+
+.addRemoveContainer {
+  text-align: center;
+}
+.addRemoveRowButton {
+  margin: 0px 17px;
+  padding: 10px 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.RemoveButton {
+  padding: 10px 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.contactNumber-company {
+  width: 47%;
+}
+.proposedContainer input {
+  width: 96%;
+  font-size: 18px;
+
+}
+.authorised-sign input{
+  background-color: #f3f3f3;
+  padding: 14px 0px;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+  padding: 15px 20px;
+  font-size: 16px;
+}
+.star{
+  color: red;
+}
+.error2{
+  padding: 5px 34px;
+}
+.signMsg{
+  color: #18c981;
+}
+.url{
+  float: right;
+}
+.addRemoveRowButton-clr{
+  background-color: #18c981;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.addRow-clr{
+  color: #002142;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+/* Tablet View */
+
+@media (min-width: 768px) and (max-width: 1300px) {
+  .Infocontainer,
+  .CompanyContactDetailContainer {
+    min-width: 100%;
+  }
+  .flexItem1,
+  .flexItem2,
+  .CompanyContactFlexContainer {
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 5px 20px;
+  }
+  .flexItem1 input,.flexItem2 input{
+    min-width: 100%;
+  }
+  .contactNumber-company {
+    width: 100%;
+  }
+  .sharholderTable td input {
+    width: 200px;
+  }
+  .sharholderTable td select {
+    width: 200px;
+  }
+  .tradereferenceTable td input {
+    width: 200px;
+  }
+  .proposedContainer input {
+    width: 93%;
+  }
+  
+  select{
+    width: 100%;
+  }
+  .CompanyContactFlexContainer input{
+    width: 100%;
+  }
+  .url input {
+    padding: 8px 12px;
+    font-size: 18px;
+}
+.url{
+  float: none;
+}
+label {
+ 
+  padding: 10px 0px;
+  font-size: 15px;
+  line-height: 24px;
+}
+.textCertficate-container{
+  float: none;
+}
+}
+@media (min-width: 1300px) and (max-width: 1880px) {
+  .Infocontainer,
+  .CompanyContactDetailContainer {
+    min-width: 100%;
+  }
+  .flexItem1,
+  .flexItem2,
+  .CompanyContactFlexContainer {
+    flex-direction: row;
+    /* align-items: center; */
+    padding: 5px 20px;
+  }
+  .flexItem1 input,.flexItem2 input{
+    min-width: 40%;
+  }
+  .contactNumber-company {
+    width: 624px;
+
+  }
+  .sharholderTable td input {
+    width: 330px;
+  }
+  .sharholderTable td select {
+    width: 330px;
+  }
+  .tradereferenceTable td input {
+    width: 300px;
+  }
+  .proposedContainer input {
+    width: 93%;
+  }
+  
+  select{
+    min-width: 40%;
+  }
+  .CompanyContactFlexContainer input{
+  width: 618px;
+  }
+}
+
+@media (min-width: 350px) and (max-width: 767px) {
+  .Infocontainer,
+  .CompanyContactDetailContainer {
+    min-width: 100%;
+  }
+  .flexItem1,
+  .flexItem2,
+  .CompanyContactFlexContainer {
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 5px 20px;
+  }
+  .flexItem1 input,.flexItem2 input{
+    width: 354px;
+  }
+  h3{
+    font-size: 22px;
+  }
+  .contactNumber-company {
+    width: 100%;
+  }
+  .sharholderTable td input {
+    width: 89px;
+    padding: 9px 0px;
+  }
+  .sharholderTable td select {
+    width: 50px;
+  }
+  .RemoveButton{
+    padding: 10px 7px;
+  }
+  .tradereferenceTable td input {
+    width: 122px;
+  }
+  .proposedContainer input {
+    width: 88%;
+  }
+  
+  select{
+    width: 100%;
+  }
+  .CompanyContactFlexContainer input{
+    width: 100%;
+  }
+  label{
+    font-size: 17px;
+  }
+  .url input {
+    padding: 8px 12px;
+    font-size: 18px;
+}
+.url{
+  float: none;
+}
+label {
+ 
+  padding: 10px 0px;
+  font-size: 17px;
+  line-height: 24px;
+}
+.textCertficate-container{
+  float: none;
+}
+.textCertficate-container{
+  float: none;
+}
+}

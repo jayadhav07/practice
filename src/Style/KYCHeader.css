@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo&display=swap');
+
+
+header{
+    text-align: center;
+    padding: 10px 0px;
+}
+h2{
+text-align: center;
+color: #18c981;
+padding: 15px 0px;
+font-size: 32px;
+font-family: 'Archivo', sans-serif;
+
+}
