@@ -748,8 +748,8 @@ const KYC = () => {
         break;
       case "CorrespondentBankName":
         if (value.length > 0) {
-          if (value.length < 5) {
-            error = " Bank Name must be at least 5 characters long";
+          if (value.length < 2) {
+            error = " Bank Name must be at least 2 characters long";
           } else if (!/[a-zA-Z]/.test(value)) {
             error = " Bank Name must contain at least one letter";
           } else if (!/^[a-zA-Z0-9_\s]+$/.test(value)) {
@@ -814,7 +814,7 @@ const KYC = () => {
       case "PrimaryContactName":
         if (value.trim() === "") {
           error = " Name is required";
-        } else if (value.length < 3) {
+        } else if (value.length < 5) {
           error = " Name must be at least 5 characters long";
         } else if (!/^[a-zA-Z\s.']+$/.test(value)) {
           error = "Name can only contain letters";
@@ -1064,19 +1064,20 @@ const KYC = () => {
       case "shareHolderName1":
         if (value.trim() === "") {
           error = "Required";
-        } else if (value.length < 5) {
+        } else if (value.length < 5 ) {
           error = "Name must be at least 5 characters long";
-        } else if (!/^[a-zA-Z\s.']+$/.test(value)) {
+        }
+       
+        else if (!/^[a-zA-Z\s.']+$/.test(value)) {
           error = "Name can only contain letters";
         }
-    
+
         break;
       case "Percentage1":
         if (value.trim() === "") {
           error = "Required";
-        }
-        else if (value < 1) {
-          error = "Number of employee cannnot be less than 1";
+        } else if (value < 1 || value > 100) {
+          error = "shareholding should be between 1 to 100";
         }
         break;
 
@@ -1086,9 +1087,6 @@ const KYC = () => {
         }
 
         break;
-
-
-
 
       case "shareHolderName2":
         if (value) {
@@ -1103,9 +1101,17 @@ const KYC = () => {
             !Formvalues.ShareHolderCountry2
           ) {
             error = " % and country is Required";
+          } else if (Formvalues.Percentage2 < 1) {
+            error = "Peracenatge cannot be less than 1";
           }
-          else if(Formvalues.Percentage2 < 1){
-            error = "Peracenatge cannot be less than 1"
+          if (Formvalues.shareHolderName3.length < 1) {
+            if (
+              parseFloat(Formvalues.Percentage2) +
+                parseFloat(Formvalues.Percentage1) >
+              100
+            ) {
+              error = "Total shareholding should between 0 and 100";
+            }
           }
         }
         break;
@@ -1123,78 +1129,93 @@ const KYC = () => {
             !Formvalues.ShareHolderCountry3
           ) {
             error = " % and country is Required";
-          }
-          else if(Formvalues.Percentage3 < 1){
-            error = "Peracenatge cannot be less than 1"
+          } else if (Formvalues.Percentage3 < 1) {
+            error = "Peracenatge cannot be less than 1";
           }
 
-
+          if (Formvalues.shareHolderName4 < 1) {
+            if (
+              parseFloat(Formvalues.Percentage2) +
+                parseFloat(Formvalues.Percentage1) +
+                parseFloat(Formvalues.Percentage3) >
+              100
+            ) {
+              error = "Peracenatge should between 0 and 100";
+            }
+          }
         }
         break;
 
+      case "shareHolderName4":
+        if (value) {
+          if (value.length < 5) {
+            error = "Name must be 5 charchters long";
+          }
+          if (!/^[a-zA-Z\s.']+$/.test(value)) {
+            error = "Name can only contain letters";
+          }
+          if (
+            Formvalues.Percentage4.trim() === "" &&
+            !Formvalues.ShareHolderCountry4
+          ) {
+            error = " % and country is Required";
+          } else if (Formvalues.Percentage4 < 1) {
+            error = "Peracenatge cannot be less than 1";
+          }
 
-
-        
-
-
-        case "shareHolderName4":
-          if (value) {
-            if (value.length < 5) {
-              error = "Name must be 5 charchters long";
-            }
-            if (!/^[a-zA-Z\s.']+$/.test(value)) {
-              error = "Name can only contain letters";
-            }
+          if (Formvalues.shareHolderName5 < 1) {
             if (
-              Formvalues.Percentage4.trim() === "" &&
-              !Formvalues.ShareHolderCountry4
+              parseFloat(Formvalues.Percentage2) +
+                parseFloat(Formvalues.Percentage1) +
+                parseFloat(Formvalues.Percentage3) +
+                parseFloat(Formvalues.Percentage4) >
+              100
             ) {
-              error = " % and country is Required";
-            }
-            else if(Formvalues.Percentage4 < 1){
-              error = "Peracenatge cannot be less than 1"
+              error = "Total shareholding should between 0 and 100";
             }
           }
-          break;
+        }
+        break;
 
+      case "shareHolderName5":
+        if (value) {
+          if (value.length < 5) {
+            error = "Name must be 5 charchters long";
+          }
+          if (!/^[a-zA-Z\s.']+$/.test(value)) {
+            error = "Name can only contain letters";
+          }
+          if (
+            Formvalues.Percentage5.trim() === "" &&
+            !Formvalues.ShareHolderCountry5
+          ) {
+            error = " % and country is Required";
+          } else if (Formvalues.Percentage5 < 1) {
+            error = "Peracenatge cannot be less than 1";
+          }
 
-          case "shareHolderName5":
-            if (value) {
-              if (value.length < 5) {
-                error = "Name must be 5 charchters long";
-              }
-              if (!/^[a-zA-Z\s.']+$/.test(value)) {
-                error = "Name can only contain letters";
-              }
-              if (
-                Formvalues.Percentage5.trim() === "" &&
-                !Formvalues.ShareHolderCountry5
-              ) {
-                error = " % and country is Required";
-              }
+          if (
+            parseFloat(Formvalues.Percentage2) +
+              parseFloat(Formvalues.Percentage1) +
+              parseFloat(Formvalues.Percentage3) +
+              parseFloat(Formvalues.Percentage4) +
+              parseFloat(Formvalues.Percentage5) >
+            100
+          ) {
+            error = "Total shareholding should between 0 and 100";
+          }
+        }
+        break;
 
-              
-
-              else if(Formvalues.Percentage5 < 1){
-                error = "Peracenatge cannot be less than 1"
-              }
-             
-            }
-            break;
-  
-
-
-
-  
       // UPLOAD Documents section
 
       case "AuthorisedSignature":
         if (value.trim() === "") {
-          error = " Signature is required";
+          error = " Signatory is required";
         } else if (value.length < 5) {
-          error = " Signature must be at least 5 characters long";
+          error = " Signatory must be at least 5 characters long";
         } else if (!/^[a-zA-Z\s.']+$/.test(value)) {
-          error = " Signature can only contain letters";
+          error = " Signatory can only contain letters";
         }
         break;
 
@@ -1251,7 +1272,7 @@ const KYC = () => {
     const { name, value } = e.target;
     setFormValues({ ...Formvalues, [name]: value });
     setFormErrors({ ...formErrors, [name]: validateField(name, value) });
-    console.log(value);
+    // console.log(value);
   };
 
   const handleFocus = (fieldName) => {
@@ -1265,12 +1286,12 @@ const KYC = () => {
     const newErrors = {};
 
     for (const field in Formvalues) {
-      console.log(Formvalues);
+      // console.log(Formvalues);
       const value = Formvalues[field];
       const error = validateField(field, value);
       if (error) {
         newErrors[field] = error;
-      
+
         hasErrors = true;
       }
     }
@@ -2183,15 +2204,9 @@ const KYC = () => {
                       onChange={handlChange}
                       onFocus={() => handleFocus("shareHolderName5")}
                     />
-                     {formErrors.shareHolderName5 && (
+                    {formErrors.shareHolderName5 && (
                       <div className="error">{formErrors.shareHolderName5}</div>
-                      
                     )}
-
-{formErrors.Percentage5 && (
-                      <div className="error">{formErrors.Percentage5}</div>
-                    )}
-
                   </td>
                   <td>
                     <input
@@ -2202,7 +2217,9 @@ const KYC = () => {
                       onFocus={() => handleFocus("Percentage5")}
                       disabled={!Formvalues.shareHolderName5}
                     />
-
+                    {formErrors.Percentage5 && (
+                      <div className="error">{formErrors.Percentage5}</div>
+                    )}
                   </td>
                   <td>
                     <select
@@ -2221,7 +2238,6 @@ const KYC = () => {
                     </select>
                   </td>
                 </tr>
-              
               </tbody>
             </table>
           </div>
