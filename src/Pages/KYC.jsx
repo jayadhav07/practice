@@ -449,6 +449,7 @@ const KYC = () => {
     AccountDepartmentEmail: "",
     ProposedBusiness: "",
     ContactPerson: "",
+
     TradeReferenceName1: "",
     TradeReferenceName2: "",
     TradeReferenceName3: "",
@@ -465,9 +466,20 @@ const KYC = () => {
     TradeReferenceEmail4: "",
 
     shareHolderName1: "",
-    shareHolderPer1: "",
-    shareHolderCountry1: "",
-
+    shareHolderName2: "",
+    shareHolderName3: "",
+    shareHolderName4: "",
+    shareHolderName5: "",
+    Percentage1: "",
+    Percentage2: "",
+    Percentage3: "",
+    Percentage4: "",
+    Percentage5: "",
+    ShareHolderCountry1: "",
+    ShareHolderCountry2: "",
+    ShareHolderCountry3: "",
+    ShareHolderCountry4: "",
+    ShareHolderCountry5: "",
     AuthorisedSignature: "",
     WebsiteURL: "",
     certificateOfIncorporation: "",
@@ -1047,6 +1059,135 @@ const KYC = () => {
         }
         break;
 
+      // Shareholder section
+
+      case "shareHolderName1":
+        if (value.trim() === "") {
+          error = "Required";
+        } else if (value.length < 5) {
+          error = "Name must be at least 5 characters long";
+        } else if (!/^[a-zA-Z\s.']+$/.test(value)) {
+          error = "Name can only contain letters";
+        }
+    
+        break;
+      case "Percentage1":
+        if (value.trim() === "") {
+          error = "Required";
+        }
+        else if (value < 1) {
+          error = "Number of employee cannnot be less than 1";
+        }
+        break;
+
+      case "ShareHolderCountry1":
+        if (value.trim() === "") {
+          error = "Required";
+        }
+
+        break;
+
+
+
+
+      case "shareHolderName2":
+        if (value) {
+          if (value.length < 5) {
+            error = "Name must be 5 charchters long";
+          }
+          if (!/^[a-zA-Z\s.']+$/.test(value)) {
+            error = "Name can only contain letters";
+          }
+          if (
+            Formvalues.Percentage2.trim() === "" &&
+            !Formvalues.ShareHolderCountry2
+          ) {
+            error = " % and country is Required";
+          }
+          else if(Formvalues.Percentage2 < 1){
+            error = "Peracenatge cannot be less than 1"
+          }
+        }
+        break;
+
+      case "shareHolderName3":
+        if (value) {
+          if (value.length < 5) {
+            error = "Name must be 5 charchters long";
+          }
+          if (!/^[a-zA-Z\s.']+$/.test(value)) {
+            error = "Name can only contain letters";
+          }
+          if (
+            Formvalues.Percentage3.trim() === "" &&
+            !Formvalues.ShareHolderCountry3
+          ) {
+            error = " % and country is Required";
+          }
+          else if(Formvalues.Percentage3 < 1){
+            error = "Peracenatge cannot be less than 1"
+          }
+
+
+        }
+        break;
+
+
+
+        
+
+
+        case "shareHolderName4":
+          if (value) {
+            if (value.length < 5) {
+              error = "Name must be 5 charchters long";
+            }
+            if (!/^[a-zA-Z\s.']+$/.test(value)) {
+              error = "Name can only contain letters";
+            }
+            if (
+              Formvalues.Percentage4.trim() === "" &&
+              !Formvalues.ShareHolderCountry4
+            ) {
+              error = " % and country is Required";
+            }
+            else if(Formvalues.Percentage4 < 1){
+              error = "Peracenatge cannot be less than 1"
+            }
+          }
+          break;
+
+
+          case "shareHolderName5":
+            if (value) {
+              if (value.length < 5) {
+                error = "Name must be 5 charchters long";
+              }
+              if (!/^[a-zA-Z\s.']+$/.test(value)) {
+                error = "Name can only contain letters";
+              }
+              if (
+                Formvalues.Percentage5.trim() === "" &&
+                !Formvalues.ShareHolderCountry5
+              ) {
+                error = " % and country is Required";
+              }
+
+              
+
+              else if(Formvalues.Percentage5 < 1){
+                error = "Peracenatge cannot be less than 1"
+              }
+             
+            }
+            break;
+  
+
+
+
+  
+      // UPLOAD Documents section
+
       case "AuthorisedSignature":
         if (value.trim() === "") {
           error = " Signature is required";
@@ -1068,7 +1209,6 @@ const KYC = () => {
           error = " Invalid";
         }
         break;
-      // ShareHolder section
 
       case "certificateOfIncorporation":
         if (value.trim() === "") {
@@ -1111,7 +1251,7 @@ const KYC = () => {
     const { name, value } = e.target;
     setFormValues({ ...Formvalues, [name]: value });
     setFormErrors({ ...formErrors, [name]: validateField(name, value) });
-    // console.log(value);
+    console.log(value);
   };
 
   const handleFocus = (fieldName) => {
@@ -1130,6 +1270,7 @@ const KYC = () => {
       const error = validateField(field, value);
       if (error) {
         newErrors[field] = error;
+      
         hasErrors = true;
       }
     }
@@ -1849,7 +1990,240 @@ const KYC = () => {
           {/* ShareHolders Section */}
           <div className="Infocontainer">
             <h3>SHAREHOLDERS</h3>
-            {/* <ShareHolder /> */}
+            <table
+              style={{ width: "100%", textAlign: "center" }}
+              cellSpacing={13}
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>%</th>
+                  <th>Country</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      name="shareHolderName1"
+                      value={Formvalues.shareHolderName1}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("shareHolderName1")}
+                    />
+
+                    {formErrors.shareHolderName1 && (
+                      <div className="error">{formErrors.shareHolderName1}</div>
+                    )}
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="Percentage1"
+                      value={Formvalues.Percentage1}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("Percentage1")}
+                    />
+
+                    {formErrors.Percentage1 && (
+                      <div className="error">{formErrors.Percentage1}</div>
+                    )}
+                  </td>
+                  <td>
+                    <select
+                      name="ShareHolderCountry1"
+                      value={Formvalues.ShareHolderCountry1}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("ShareHolderCountry1")}
+                      className="sharholderCountry"
+                    >
+                      {countries.map((country, i) => (
+                        <option key={i} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                    {formErrors.ShareHolderCountry1 && (
+                      <div className="error">
+                        {formErrors.ShareHolderCountry1}
+                      </div>
+                    )}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      name="shareHolderName2"
+                      value={Formvalues.shareHolderName2}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("shareHolderName2")}
+                    />
+                    {formErrors.shareHolderName2 && (
+                      <div className="error">{formErrors.shareHolderName2}</div>
+                    )}
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="Percentage2"
+                      value={Formvalues.Percentage2}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("Percentage2")}
+                      disabled={!Formvalues.shareHolderName2}
+                    />
+                  </td>
+                  <td>
+                    <select
+                      name="ShareHolderCountry2"
+                      value={Formvalues.ShareHolderCountry2}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("ShareHolderCountry2")}
+                      className="sharholderCountry"
+                      disabled={!Formvalues.shareHolderName2}
+                    >
+                      {countries.map((country, i) => (
+                        <option key={i} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      name="shareHolderName3"
+                      value={Formvalues.shareHolderName3}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("shareHolderName3")}
+                    />
+                    {formErrors.shareHolderName3 && (
+                      <div className="error">{formErrors.shareHolderName3}</div>
+                    )}
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="Percentage3"
+                      value={Formvalues.Percentage3}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("Percentage3")}
+                      disabled={!Formvalues.shareHolderName3}
+                    />
+                  </td>
+                  <td>
+                    <select
+                      name="ShareHolderCountry3"
+                      value={Formvalues.ShareHolderCountry3}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("ShareHolderCountry3")}
+                      className="sharholderCountry"
+                      disabled={!Formvalues.shareHolderName3}
+                    >
+                      {countries.map((country, i) => (
+                        <option key={i} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      name="shareHolderName4"
+                      value={Formvalues.shareHolderName4}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("shareHolderName4")}
+                    />
+                    {formErrors.shareHolderName4 && (
+                      <div className="error">{formErrors.shareHolderName4}</div>
+                    )}
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="Percentage4"
+                      value={Formvalues.Percentage4}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("Percentage4")}
+                      disabled={!Formvalues.shareHolderName4}
+                    />
+                  </td>
+                  <td>
+                    <select
+                      name="ShareHolderCountry4"
+                      value={Formvalues.ShareHolderCountry4}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("ShareHolderCountry4")}
+                      className="sharholderCountry"
+                      disabled={!Formvalues.shareHolderName4}
+                    >
+                      {countries.map((country, i) => (
+                        <option key={i} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      name="shareHolderName5"
+                      value={Formvalues.shareHolderName5}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("shareHolderName5")}
+                    />
+                     {formErrors.shareHolderName5 && (
+                      <div className="error">{formErrors.shareHolderName5}</div>
+                      
+                    )}
+
+{formErrors.Percentage5 && (
+                      <div className="error">{formErrors.Percentage5}</div>
+                    )}
+
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="Percentage5"
+                      value={Formvalues.Percentage5}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("Percentage5")}
+                      disabled={!Formvalues.shareHolderName5}
+                    />
+
+                  </td>
+                  <td>
+                    <select
+                      name="ShareHolderCountry5"
+                      value={Formvalues.ShareHolderCountry5}
+                      onChange={handlChange}
+                      onFocus={() => handleFocus("ShareHolderCountry5")}
+                      className="sharholderCountry"
+                      disabled={!Formvalues.shareHolderName5}
+                    >
+                      {countries.map((country, i) => (
+                        <option key={i} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
           </div>
 
           {/* Company Contact Details */}
@@ -2445,8 +2819,10 @@ const KYC = () => {
 
           <div className="Infocontainer kycDocumentsContainer">
             <h3>UPLOAD KYC DOCUMENTS</h3>
-            <br/>
-            <p className="signMsg" style={{ margin: "0px 20px" }}>Please Upload File size less than 350kb</p>
+            <br />
+            <p className="signMsg" style={{ margin: "0px 20px" }}>
+              Please Upload File size less than 350kb
+            </p>
             <div>
               <label>
                 1) Certificate of Incorporation <span className="star">*</span>{" "}
@@ -2622,14 +2998,10 @@ const KYC = () => {
               )}
             </div>
 
-
             <div className="submit-btn">
-              
-              
-          <button type="submit" onClick={handleSubmit}>Submit </button>
-              
-
-
+              <button type="submit" onClick={handleSubmit}>
+                Submit{" "}
+              </button>
             </div>
           </div>
         </div>

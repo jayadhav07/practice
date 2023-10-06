@@ -201,18 +201,7 @@ select {
 .url{
   float: right;
 }
-.addRemoveRowButton-clr{
-  background-color: #18c981;
-  color: #fff;
-  font-size: 15px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.addRow-clr{
-  color: #002142;
-  font-size: 15px;
-  text-transform: uppercase;
-}
+
 
 /* Tablet View */
 
