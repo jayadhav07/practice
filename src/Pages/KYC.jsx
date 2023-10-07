@@ -490,12 +490,13 @@ const KYC = () => {
     BankRefLetter: "",
     PassPortCopy: "",
     AuthorisedSignatureImage: "",
+    checkDeclaration: false,
   };
 
   const [Formvalues, setFormValues] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState({});
 
-  const validateField = (fieldName, value) => {
+  const validateField = (fieldName, value, checked) => {
     let error = "";
 
     switch (fieldName) {
@@ -982,7 +983,7 @@ const KYC = () => {
           if (value.trim() === "" && !Formvalues.TradeReferencePhone1) {
             error = "Email and phone is Required";
           } else if (
-            !/^[A-Za-z0-9_*&^~!$%=+}{'?\.-]+@[A-Za-z]+(\.com|\.net|\.org|\.info|\.biz|\.edu|\.gov|\.mil|\.int|\.us|\.uk|\.ca|\.au|\.de|\.jp|\.fr|\.in|\.cn|\.br|\.ae|.co.in)$/.test(
+            !/^[A-Za-z0-9]+[A-Za-z0-9_*&^~!$%=+}{'?\.-]+[A-Za-z0-9]@[A-Za-z0-9]+[A-Za-z0-9\.\-]+[A-Za-z0-9]+(\.com|\.net|\.org|\.info|\.biz|\.edu|\.gov|\.mil|\.int|\.us|\.uk|\.ca|\.au|\.de|\.jp|\.fr|\.in|\.cn|\.br|\.ae|.co.in|\.COM|\.NET|\.ORG|\.INFO|\.BIZ|\.EDU|\.GOV|\.MIL|\.INT|\.US|\.UK|\.CA|\.AU|\.DE|\.JP|\.FR|\.IN|\.CN|\.BR|\.AE|.CO.IN)$/.test(
               value
             )
           ) {
@@ -1064,11 +1065,9 @@ const KYC = () => {
       case "shareHolderName1":
         if (value.trim() === "") {
           error = "Required";
-        } else if (value.length < 5 ) {
+        } else if (value.length < 5) {
           error = "Name must be at least 5 characters long";
-        }
-       
-        else if (!/^[a-zA-Z\s.']+$/.test(value)) {
+        } else if (!/^[a-zA-Z\s.']+$/.test(value)) {
           error = "Name can only contain letters";
         }
 
@@ -1261,7 +1260,18 @@ const KYC = () => {
 
         break;
 
+      case "checkDeclaration":
+     
+         if (Formvalues.checkDeclaration) {
+          error = "Required";
+        }
+        else if(!value){
+          error = "required"
+        }
+        break;
+
       default:
+        
         break;
     }
 
@@ -1274,7 +1284,13 @@ const KYC = () => {
     setFormErrors({ ...formErrors, [name]: validateField(name, value) });
     // console.log(value);
   };
-
+  const handleCheckbox = (e) => {
+    const { name, checked } = e.target;
+    setFormValues({ ...Formvalues, [name]: checked });
+    setFormErrors({ ...formErrors, [name]: validateField(name, checked) });
+    
+    console.log(e.target.name);
+  };
   const handleFocus = (fieldName) => {
     setFormErrors({ ...formErrors, [fieldName]: "" });
   };
@@ -1294,6 +1310,9 @@ const KYC = () => {
 
         hasErrors = true;
       }
+
+
+      
     }
 
     // Check for empty fields and add 'required' error
@@ -1304,6 +1323,8 @@ const KYC = () => {
     //     hasErrors = true;
     //   }
     // }
+    
+    
 
     setFormErrors(newErrors);
 
@@ -1415,6 +1436,7 @@ const KYC = () => {
       });
     }
   }, [Formvalues.TradeReferenceName4]);
+  
 
   return (
     <>
@@ -2962,7 +2984,14 @@ const KYC = () => {
               <p>
                 {" "}
                 <span>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    name="checkDeclaration"
+                    checked={Formvalues.checkDeclaration}
+                    onChange={handleCheckbox}
+                    onFocus={() => handleFocus("checkDeclaration")}
+                    value={Formvalues.checkDeclaration}
+                  />
                 </span>{" "}
                 I DECLARE THAT: - This application form was completed by me, a
                 representative authorized to submit this form on behalf of the
@@ -2974,6 +3003,10 @@ const KYC = () => {
                 to be false, then I will be held liable under the provisions of
                 the applicable UAE Law.
               </p>
+
+              {formErrors.checkDeclaration && (
+                <div className="error">{formErrors.checkDeclaration}</div>
+              )}
             </div>
 
             <div>
