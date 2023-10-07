@@ -1260,20 +1260,19 @@ const KYC = () => {
 
         break;
 
-      case "checkDeclaration":
+      // case "checkDeclaration":
      
-         if (Formvalues.checkDeclaration) {
-          error = "Required";
-        }
-        else if(!value){
-          error = "required"
-        }
-        break;
+      //    if (Formvalues.checkDeclaration) {
+      //     error = "Required";
+      //   }
+        
+      //   break;
 
       default:
         
         break;
     }
+    
 
     return error;
   };
@@ -1288,11 +1287,14 @@ const KYC = () => {
     const { name, checked } = e.target;
     setFormValues({ ...Formvalues, [name]: checked });
     setFormErrors({ ...formErrors, [name]: validateField(name, checked) });
+    console.log(checked)
     
     console.log(e.target.name);
   };
   const handleFocus = (fieldName) => {
     setFormErrors({ ...formErrors, [fieldName]: "" });
+    
+    console.log(fieldName)
   };
 
   const handleSubmit = (e) => {
@@ -2990,7 +2992,7 @@ const KYC = () => {
                     checked={Formvalues.checkDeclaration}
                     onChange={handleCheckbox}
                     onFocus={() => handleFocus("checkDeclaration")}
-                    value={Formvalues.checkDeclaration}
+                    // value={Formvalues.checkDeclaration}
                   />
                 </span>{" "}
                 I DECLARE THAT: - This application form was completed by me, a
