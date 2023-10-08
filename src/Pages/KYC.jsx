@@ -482,21 +482,21 @@ const KYC = () => {
     ShareHolderCountry5: "",
     AuthorisedSignature: "",
     WebsiteURL: "",
-    certificateOfIncorporation: "",
-    memorandum: "",
-    tradeLicenseCertificate: "",
-    taxRegCertificate: "",
-    companyProfile: "",
-    BankRefLetter: "",
-    PassPortCopy: "",
-    AuthorisedSignatureImage: "",
+    certificateOfIncorporation: null,
+    memorandum: null,
+    tradeLicenseCertificate: null,
+    taxRegCertificate: null,
+    companyProfile: null,
+    BankRefLetter: null,
+    PassPortCopy: null,
+    AuthorisedSignatureImage: null,
     checkDeclaration: false,
   };
 
   const [Formvalues, setFormValues] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState({});
 
-  const validateField = (fieldName, value, checked) => {
+  const validateField = (fieldName, value, checked, e) => {
     let error = "";
 
     switch (fieldName) {
@@ -659,9 +659,7 @@ const KYC = () => {
         if (value.trim() === "" || selectedDate <= currentDate) {
           error = "Invalid Date";
         }
-        // else if (selectedDate <= currentDate) {
-        //   error = "Invalid Date";
-        // }
+       
         break;
       case "DateOfIncorporation":
         const DateOfIncorporation = new Date(value);
@@ -1231,48 +1229,45 @@ const KYC = () => {
         break;
 
       case "certificateOfIncorporation":
-        if (value.trim() === "") {
+        if (value === null) {
           error = "Required";
         }
         break;
 
       case "memorandum":
-        if (value.trim() === "") {
+        if (value === null) {
           error = "Required";
         }
         break;
-      case "tradeLicenseCertificate":
-        if (value.trim() === "") {
-          error = "Required";
-        }
-        break;
-      case "taxRegCertificate":
-        if (value.trim() === "") {
-          error = "Required";
-        }
 
+      case "tradeLicenseCertificate":
+        if (value === null) {
+          error = "Required";
+        }
+        break;
+
+      case "PassPortCopy":
+        if (value === null) {
+          error = "Required";
+        }
         break;
 
       case "AuthorisedSignatureImage":
-        if (value.trim() === "") {
+        if (value === null) {
+          error = "Required";
+        }
+        break;
+
+      case "checkDeclaration":
+        if (value === false) {
           error = "Required";
         }
 
         break;
 
-      // case "checkDeclaration":
-     
-      //    if (Formvalues.checkDeclaration) {
-      //     error = "Required";
-      //   }
-        
-      //   break;
-
       default:
-        
         break;
     }
-    
 
     return error;
   };
@@ -1287,14 +1282,23 @@ const KYC = () => {
     const { name, checked } = e.target;
     setFormValues({ ...Formvalues, [name]: checked });
     setFormErrors({ ...formErrors, [name]: validateField(name, checked) });
-    console.log(checked)
-    
-    console.log(e.target.name);
+    // console.log(value)
+
+    // console.log(e.target.checked);
   };
+
+  const handlFileChange = (e) => {
+    const name = e.target.name;
+    const file = e.target.files[0];
+    setFormValues({...Formvalues, [name]: file});
+    setFormErrors({...formErrors, [name]: validateField(name, file)});
+    console.log(name, file);
+  };
+
   const handleFocus = (fieldName) => {
-    setFormErrors({ ...formErrors, [fieldName]: "" });
-    
-    console.log(fieldName)
+    setFormErrors({...formErrors, [fieldName]: ""});
+
+    // console.log(fieldName)
   };
 
   const handleSubmit = (e) => {
@@ -1312,9 +1316,6 @@ const KYC = () => {
 
         hasErrors = true;
       }
-
-
-      
     }
 
     // Check for empty fields and add 'required' error
@@ -1325,8 +1326,6 @@ const KYC = () => {
     //     hasErrors = true;
     //   }
     // }
-    
-    
 
     setFormErrors(newErrors);
 
@@ -1438,7 +1437,6 @@ const KYC = () => {
       });
     }
   }, [Formvalues.TradeReferenceName4]);
-  
 
   return (
     <>
@@ -2869,10 +2867,10 @@ const KYC = () => {
               </label>
               <input
                 type="file"
-                onChange={handlChange}
+                onChange={handlFileChange}
                 name="certificateOfIncorporation"
-                value={Formvalues.certificateOfIncorporation}
-                onFocus={() => handleFocus("TradeReferenceEmail4")}
+                // value={Formvalues.certificateOfIncorporation}
+                onFocus={() => handleFocus("certificateOfIncorporation")}
               />
 
               {formErrors.certificateOfIncorporation && (
@@ -2890,8 +2888,8 @@ const KYC = () => {
               </label>
               <input
                 type="file"
-                onChange={handlChange}
-                value={Formvalues.memorandum}
+                onChange={handlFileChange}
+                // value={Formvalues.memorandum}
                 name="memorandum"
                 onFocus={() => handleFocus("memorandum")}
               />
@@ -2906,9 +2904,9 @@ const KYC = () => {
               </label>
               <input
                 type="file"
-                onChange={handlChange}
+                onChange={handlFileChange}
                 name="tradeLicenseCertificate"
-                value={Formvalues.tradeLicenseCertificate}
+                // value={Formvalues.tradeLicenseCertificate}
                 onFocus={() => handleFocus("tradeLicenseCertificate")}
               />
 
@@ -2924,9 +2922,9 @@ const KYC = () => {
               </label>
               <input
                 type="file"
-                onChange={handlChange}
+                onChange={handlFileChange}
                 name="taxRegCertificate"
-                value={Formvalues.taxRegCertificate}
+                // value={Formvalues.taxRegCertificate}
                 onFocus={() => handleFocus("tradeLicenseCertificate")}
               />
 
@@ -2954,12 +2952,22 @@ const KYC = () => {
             </div>
             <div>
               <label>5) Company Profile ( If Available) </label>
-              <input type="file" />
+              <input
+                type="file"
+                name="companyProfile"
+                onChange={handlFileChange}
+                onFocus={() => handleFocus("companyProfile")}
+              />
             </div>
 
             <div>
               <label>7) Bank Reference Letter ( Upon Trade or Request) </label>
-              <input type="file" />
+              <input
+                type="file"
+                name="BankRefLetter"
+                onChange={handlFileChange}
+                onFocus={() => handleFocus("BankRefLetter")}
+              />
             </div>
             <div>
               <label>
@@ -2968,9 +2976,9 @@ const KYC = () => {
               </label>
               <input
                 type="file"
-                onChange={handlChange}
+                onChange={handlFileChange}
                 name="PassPortCopy"
-                value={Formvalues.PassPortCopy}
+                // value={Formvalues.PassPortCopy}
                 onFocus={() => handleFocus("PassPortCopy")}
               />
 
@@ -2992,6 +3000,7 @@ const KYC = () => {
                     checked={Formvalues.checkDeclaration}
                     onChange={handleCheckbox}
                     onFocus={() => handleFocus("checkDeclaration")}
+
                     // value={Formvalues.checkDeclaration}
                   />
                 </span>{" "}
@@ -3018,8 +3027,8 @@ const KYC = () => {
               <input
                 type="file"
                 name="AuthorisedSignatureImage"
-                value={Formvalues.AuthorisedSignatureImage}
-                onChange={handlChange}
+                // value={Formvalues.AuthorisedSignatureImage}
+                onChange={handlFileChange}
                 onFocus={() => handleFocus("AuthorisedSignatureImage")}
               />
               <p className="signMsg" style={{ margin: "8px 0px" }}>
